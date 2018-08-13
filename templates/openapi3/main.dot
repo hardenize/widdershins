@@ -92,8 +92,8 @@ Base URLs:
 {{?}}
 
 {{? block.rows.length}}|Name|Type|Description|
-|---|---|---|---|---|{{?}}
-{{~ block.rows :p}}|{{=p.displayName}}{{? p.required}}&#160;<span style="color:red">*</span>{{?}}|{{=p.safeType}}{{? p.restrictions}}<br>{{=p.restrictions}}{{?}}|{{=p.description||''}}|
+|---|---|---|{{?}}
+{{~ block.rows :p}}|{{=p.displayName}}{{? p.required}}<span style="color:red">*</span>{{?}}|{{=p.safeType}}{{? p.restrictions}}<br>{{=p.restrictions}}{{?}}|{{=p.description||'none'}}|
 {{~}}
 {{~}}
 {{? (blocks[0].rows.length === 0) && (blocks.length === 1) }}

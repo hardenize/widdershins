@@ -1,8 +1,8 @@
 <h3 id="{{=data.operationUniqueSlug}}-parameters">Parameters</h3>
 
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-{{~ data.parameters :p}}|{{=p.name}}|{{=p.in}}|{{=p.safeType}}|{{=p.required}}|{{=p.shortDesc || 'none'}}|
+|Parameter|In|Type|Description|
+|---|---|---|---|
+{{~ data.parameters :p}}|{{=p.name}}{{? p.required}}<span style="color:red">*</span>{{?}}|{{=p.in}}|{{=p.safeType}}|{{=p.shortDesc || 'none'}}|
 {{~}}
 
 {{? data.longDescs }}
