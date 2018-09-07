@@ -179,9 +179,9 @@ function getParameters(data) {
             }
             if (pSchema["x-widdershins-oldRef"]) {
                 let schemaName = pSchema["x-widdershins-oldRef"].replace('#/components/schemas/','');
-                param.safeType = '['+schemaName+'](#schema'+schemaName.toLowerCase()+')';
+                param.safeType = '['+schemaName+'](#tocs'+schemaName.toLowerCase()+')';
             }
-            if (param.refName) param.safeType = '['+param.refName+'](#schema'+param.refName.toLowerCase()+')';
+            if (param.refName) param.safeType = '['+param.refName+'](#tocs'+param.refName.toLowerCase()+')';
         }
         if (pSchema) {
             param.exampleValues.object = param.example || param.default || common.getSample(pSchema,data.options,{skipReadOnly:true},data.api);
@@ -409,7 +409,7 @@ function getResponses(data) {
             }
             if (contentType.schema && contentType.schema["x-widdershins-oldRef"]) {
                 let schemaName = contentType.schema["x-widdershins-oldRef"].replace('#/components/schemas/','');
-                entry.schema = '['+schemaName+'](#schema'+schemaName.toLowerCase()+')';
+                entry.schema = '['+schemaName+'](#tocs'+schemaName.toLowerCase()+')';
                 entry.$ref = true;
             }
             else {
