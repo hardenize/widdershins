@@ -1,5 +1,5 @@
-{{=data.methodUpper}} {{=data.fullPath}}{{=data.requiredQueryString}} HTTP/1.1
-{{? data.host}}Host: {{=data.host}}{{?}}
+{{=data.methodUpper}} {{=data.fullPath}}{{=data.requiredQueryString}} HTTP/1.1{{? data.host}}
+Host: {{=data.host}}{{?}}
 {{?data.consumes.length}}Content-Type: {{=data.consumes[0]}}
 {{?}}
 {{?data.headerParameters.length}}{{~ data.headerParameters :p:index}}{{=p.name}}: {{=p.exampleValues.object}}
