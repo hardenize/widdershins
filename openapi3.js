@@ -245,8 +245,10 @@ function getParameters(data) {
     let existingAuth = data.allHeaders.find(function(e,i,a){
         return e.name.toLowerCase() === 'authorization';
     });
-    if (data.operation.security && data.operation.security.length) {
-        effSecurity = Object.keys(data.operation.security[0]);
+    if (data.operation.security) {
+        if (data.operation.security.length) {
+            effSecurity = Object.keys(data.operation.security[0]);
+        }
     }
     else if (data.api.security && data.api.security.length) {
         effSecurity = Object.keys(data.api.security[0]);
@@ -275,6 +277,9 @@ function getParameters(data) {
                     authHeader.isAuth = true;
                     authHeader.exampleValues = {};
                     authHeader.exampleValues.object = 'API_KEY';
+                    if (data.options.customApiKeyValue) {
+                        authHeader.exampleValues.object = data.options.customApiKeyValue;
+                    }
                     authHeader.exampleValues.json = "'" + authHeader.exampleValues.object + "'";
                     data.allHeaders.push(authHeader);
                 }
@@ -407,7 +412,7 @@ function getResponses(data) {
                 entry.type = contentType.schema.type;
                 entry.schema = data.translations.schemaInline;
             }
-            if (contentType.schema && contentType.schema["x-widdershins-oldRef"]) {
+            if (contentType.schema && contentType.schema["x-widdershins-oldRef"] && contentType.schema["x-widdershins-oldRef"].startsWith('#/components/')) {
                 let schemaName = contentType.schema["x-widdershins-oldRef"].replace('#/components/schemas/','');
                 entry.schema = '['+schemaName+'](#tocs'+schemaName.toLowerCase()+')';
                 entry.$ref = true;
@@ -594,7 +599,7 @@ function convertInner(api, options, callback) {
     data.translations = {};
     templates.translations(data);
 
-    data.version = (data.api.info.version.toLowerCase().startsWith('v') ? data.api.info.version : 'v'+data.api.info.version);
+    data.version = (data.api.info && data.api.info.version && typeof data.api.info.version === 'string' && data.api.info.version.toLowerCase().startsWith('v') ? data.api.info.version : 'v'+data.api.info.version);
 
     let header = {};
     header.title = api.info.title||'API' + ' ' + data.version;
@@ -612,7 +617,7 @@ function convertInner(api, options, callback) {
 
     data.options = options;
     data.header = header;
-    data.title_prefix = (data.api.info.title.trim()||'API').split(' ').join('-');
+    data.title_prefix = (data.api.info && data.api.info.version ? common.slugify(data.api.info.title.trim()||'API') : '');
     data.templates = templates;
     data.resources = convertToToc(api,data);
 
@@ -672,7 +677,7 @@ function convertInner(api, options, callback) {
 
 function convert(api, options, callback) {
     if (options.resolve) {
-        swagger2openapi.convertObj(api, {resolve:true,source:options.source}, function(err, sOptions) {
+        swagger2openapi.convertObj(api, {resolve:true,source:options.source,verbose:options.verbose}, function(err, sOptions) {
         if (err) {
             console.error(err.message);
         }
