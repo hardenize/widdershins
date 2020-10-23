@@ -45,7 +45,7 @@
     "openapi-sampler": "^1.0.0-beta.18",
     "reftools": "^1.0.0",
     "safe-json-stringify": "^1.2.0",
-    "swagger2openapi": "^6.2.1",
+    "swagger2openapi": "^7.0.3",
     "urijs": "^1.19.0",
     "yargs": "^15.4.1"
   },
