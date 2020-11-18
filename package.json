@@ -47,7 +47,7 @@
     "safe-json-stringify": "^1.2.0",
     "swagger2openapi": "^7.0.3",
     "urijs": "^1.19.0",
-    "yargs": "^15.4.1"
+    "yargs": "^16.0.0"
   },
   "devDependencies": {
     "mocha": "^8.1.3",
