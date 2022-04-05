@@ -46,7 +46,7 @@
     "reftools": "^1.1.8",
     "safe-json-stringify": "^1.2.0",
     "swagger2openapi": "^7.0.5",
-    "urijs": "^1.19.7",
+    "urijs": "^1.19.11",
     "yargs": "^15.4.1"
   },
   "devDependencies": {
