@@ -39,7 +39,7 @@
     "httpsnippet": "^1.25.0",
     "jgexml": "latest",
     "js-yaml": "^3.6.1",
-    "node-fetch": "^2.0.0",
+    "node-fetch": "^3.2.10",
     "oas-resolver": "^2.5.4",
     "oas-schema-walker": "^1.1.0",
     "openapi-sampler": "^1.3.0",
