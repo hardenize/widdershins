@@ -339,7 +339,9 @@ function getBodyParameterExamples(data) {
     }
     else {
         content += '```\n';
-        content += obj.value;
+        // See: https://github.com/hardenize/issues-eng/issues/2233
+        // The OpenApi 'example' is just a string, definetly not an object with the 'value' property.
+        content += obj + '\n';
         content += '```\n\n';
     }
     return content;
