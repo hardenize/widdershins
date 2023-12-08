@@ -1,7 +1,7 @@
 ## {{= data.operationUniqueName}}
 
-{{? data.operation.operationId}}
-<a id="opId{{=data.operation.operationId}}"></a>
+{{? data.operation.summary}}
+<a id="opId{{=data.operation.summary}}"></a>
 {{?}}
 
 {{ data.methodUpper = data.method.verb.toUpperCase(); }}
@@ -21,8 +21,6 @@
 {{?}}
 
 `{{= data.methodUpper}} {{=data.method.path}}`
-
-{{? data.operation.summary && !data.options.tocSummary}}*{{= data.operation.summary }}*{{?}}
 
 {{? data.operation.description}}{{= data.operation.description }}{{?}}
 
