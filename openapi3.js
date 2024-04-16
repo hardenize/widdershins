@@ -57,7 +57,19 @@ function convertToToc(source,data) {
         }
     }
     for (let r in resources) {
-        if (resources[r].count <= 0) delete resources[r];
+        if (resources[r].count <= 0){
+            delete resources[r];
+        } else {
+            // Sort fields in methods object asc
+            const sortedKeys = Object.keys(resources[r].methods).sort((a, b) => {
+               return resources[r].methods[a].operation.summary.localeCompare(resources[r].methods[b].operation.summary);
+            });
+            const sortedObj = sortedKeys.reduce((acc, key) => {
+                acc[key] = resources[r].methods[key];
+                return acc;
+            }, {});
+            resources[r].methods = sortedObj;
+        }
     }
     return resources;
 }
