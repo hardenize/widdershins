@@ -30,6 +30,8 @@ function convertToToc(source,data) {
             resources[tag.name] = { count: 0, methods: {}, description: tag.description, externalDocs: tag.externalDocs };
         }
     }
+
+
     for (var p in source.paths) {
         for (var m in source.paths[p]) {
             if ((m !== 'parameters') && (m !== 'summary') && (m !== 'description') && (!m.startsWith('x-'))) {
@@ -57,9 +59,19 @@ function convertToToc(source,data) {
         }
     }
     for (let r in resources) {
-        if (resources[r].count <= 0) delete resources[r];
+        if (resources[r].count <= 0){
+            delete resources[r];}
+        else{
+            //Sort fields in methods object asc
+            const sortedKeys = Object.keys(resources[r].methods).sort();
+            const sortedObj = sortedKeys.reduce((acc, key) => {
+                acc[key] = resources[r].methods[key];
+                return acc;
+            }, {});
+            resources[r].methods = sortedObj;
+        }
     }
-    return resources;
+    return resources
 }
 
 function getTagGroup(tag, tagGroups){
